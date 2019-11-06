@@ -24,9 +24,9 @@ for_col_index:
 	mov r0, r5, lsl #3	// r0 = r5 * 8
 	add r0, r5, lsl #2	// r0 = r0 + r5 * 4 ( r0=r5 * 12 )
 	add r0, r6, lsl #2	// r0 = r0 + r6 * 4 ( r0=r5 * 12 + r6 * 4 )
-	add r0, r4		// r0 = r0 + base_address_of_a
+	//add r0, r4		// r0 = r0 + base_address_of_a
 
-	ldr r3, [r0]
+	ldr r3, [r0, r4]	// r3 = *(r0+r4)
 	mov r2, r6
 	mov r1, r5
 	ldr r0, =output

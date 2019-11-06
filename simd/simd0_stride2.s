@@ -11,9 +11,9 @@ main:
 	push {lr}
 
 	ldr r0, =a
-	vld2.32 {q0,q1}, [r0]
+	vld4.32 {q0,q1}, [r0]
 	vmul.f32 q2,q0,q1
 	ldr r0, =c
-	vst2.32 {q2},[r0]
+	vst1.32 {q2},[r0]
 
 	pop {pc}
