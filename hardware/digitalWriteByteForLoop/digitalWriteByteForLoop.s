@@ -12,7 +12,7 @@
 .equ PIN6, 6	// wipi pin 6 - bcm 25
 .equ PIN7, 7	// wipi pin 7 - bcm 4
 
-.equ PAUSE, 500 // pause 500/1000 second = 1/2 second
+.equ PAUSE, 250 // pause 250/1000 second = 1/4 second
 
 .global main
 .text
