@@ -15,6 +15,8 @@
 .equ GRN_ST, 1
 .equ BLU_ST, 2
 
+.equ DELAY, 200
+
 .text
 .global main
 main:
@@ -27,6 +29,9 @@ main:
 	mov r0, #RED_PIN
 	bl pinOn
 lp:
+	ldr r0, =#DELAY
+	bl delay
+
 	bl readForwardButton
 	cmp r0, #HIGH
 	bne lp_next
@@ -34,22 +39,24 @@ lp:
 	cmp r4, #RED_ST
 	moveq r0, #RED_PIN	// pin going off
 	moveq r1, #GRN_PIN	// pin going on
-	bleq action
 	moveq r4, #GRN_ST
+	bleq action
+	beq lp
 
 	cmp r4, #GRN_ST
 	moveq r0, #GRN_PIN	// pin going off
 	moveq r1, #BLU_PIN	// pin going on
-	bleq action
 	moveq r4, #BLU_ST
+	bleq action
+	beq lp
 
 	cmp r4, #BLU_ST
 	moveq r0, #BLU_PIN	// pin going off
 	moveq r1, #RED_PIN	// pin going on
-	bleq action
 	moveq r4, #RED_ST
-
+	bleq action
 	bal lp
+
 lp_next:
 	bl readReverseButton
 	cmp r0, #HIGH
@@ -58,21 +65,22 @@ lp_next:
 	cmp r4, #RED_ST
 	moveq r0, #RED_PIN	// pin going off
 	moveq r1, #BLU_PIN	// pin going on
-	bleq action
 	moveq r4, #BLU_ST
+	bleq action
+	beq lp
 
 	cmp r4, #BLU_ST
 	moveq r0, #BLU_PIN	// pin going off
 	moveq r1, #GRN_PIN	// pin going on
-	bleq action
 	moveq r4, #GRN_ST
+	bleq action
+	beq lp
 
 	cmp r4, #GRN_ST
 	moveq r0, #GRN_PIN	// pin going off
 	moveq r1, #RED_PIN	// pin going on
-	bleq action
 	moveq r4, #RED_ST
-
+	bleq action
 	bal lp
 
 	mov r0, #0//return 0;
