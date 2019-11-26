@@ -32,22 +32,24 @@ lp:
 	bne lp_next
 
 	cmp r4, #RED_ST
-	moveq r0, #BLU_PIN	// pin going off
-	moveq r1, #RED_PIN	// pin going on
+	moveq r0, #RED_PIN	// pin going off
+	moveq r1, #GRN_PIN	// pin going on
 	bleq action
 	moveq r4, #GRN_ST
 
 	cmp r4, #GRN_ST
-	moveq r0, #RED_PIN
-	moveq r1, #GRN_PIN
+	moveq r0, #GRN_PIN	// pin going off
+	moveq r1, #BLU_PIN	// pin going on
 	bleq action
 	moveq r4, #BLU_ST
 
 	cmp r4, #BLU_ST
-	moveq r0, #GRN_PIN
-	moveq r1, #BLU_PIN
+	moveq r0, #BLU_PIN	// pin going off
+	moveq r1, #RED_PIN	// pin going on
 	bleq action
 	moveq r4, #RED_ST
+
+	bal lp
 lp_next:
 	bl readReverseButton
 	cmp r0, #HIGH
@@ -59,17 +61,17 @@ lp_next:
 	bleq action
 	moveq r4, #BLU_ST
 
-	cmp r4, #GRN_ST
-	moveq r0, #GRN_PIN
-	moveq r1, #RED_PIN
-	bleq action
-	moveq r4, #RED_ST
-
 	cmp r4, #BLU_ST
-	moveq r0, #BLU_PIN
-	moveq r1, #GRN_PIN
+	moveq r0, #BLU_PIN	// pin going off
+	moveq r1, #GRN_PIN	// pin going on
 	bleq action
 	moveq r4, #GRN_ST
+
+	cmp r4, #GRN_ST
+	moveq r0, #GRN_PIN	// pin going off
+	moveq r1, #RED_PIN	// pin going on
+	bleq action
+	moveq r4, #RED_ST
 
 	bal lp
 
@@ -113,12 +115,14 @@ readReverseButton:
 	pop {pc}
 
 action: // r0 holds pin to turn off, r1 holds pin to turn on
-	push {lr}
+	push {r5,lr}
+	mrs r5, cpsr
 	push {r1}
 	bl pinOff
 	pop {r0}
 	bl pinOn
-	pop {pc}
+	msr cpsr, r5
+	pop {r5,pc}
 
 my_setup:
 	push {lr}
@@ -137,5 +141,15 @@ my_setup:
 
 	mov r0, #BLU_PIN
 	bl setPinOutput
+
+	// clear all output pins
+	mov r0, #RED_PIN
+	bl pinOff
+
+	mov r0, #GRN_PIN
+	bl pinOff
+
+	mov r0, #BLU_PIN
+	bl pinOff
 
 	pop {pc}
