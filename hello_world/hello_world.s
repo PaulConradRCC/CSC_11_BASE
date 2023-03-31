@@ -5,8 +5,8 @@
 .global main
 
 .align 4
-.section .data
-// all non-constant, initialized data goes here
+.section .rodata
+// all constant data goes here
 hello_msg:	.asciz "Hello world!\n"
 
 .align 4

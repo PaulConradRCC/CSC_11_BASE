@@ -1,0 +1,11 @@
+# Makefile
+all: first_2
+
+first_2: first_2.o
+	gcc -g -o $@ $+
+
+first_2.o: first_2.s
+	as -g -o $@ $<
+
+clean:
+	rm -rf first_2 *.o
