@@ -1,4 +1,5 @@
-.section .data
+.align 4
+.section .rodata
 /* Prompt message */
 prompt: .asciz "Please type in two integer values (seperated by a space): "
 
@@ -8,10 +9,13 @@ response: .asciz "I read the numbers %d and %d from the keyboard\n"
 /* Format pattern for scanf */
 pattern: .asciz "%d %d"
 
+.align 4
+.data
 /* Where scanf will store the number read */
 value_read1: .word 0
 value_read2: .word 0
 
+.align 4
 .section .text
 .global main
 main:
