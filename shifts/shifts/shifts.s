@@ -1,6 +1,7 @@
 .global main
 
-.data
+.align 4
+.section .rodata
 out_msg: .asciz "Value was %d, now is %d\n"
 
 .align 4
@@ -36,7 +37,7 @@ main:
 	bl printf
 
 	mov r0, #47
-	add r2, r0, r0, lsl #4
+	add r2, r0, r0, lsl #4	// r2 = r0 + r0 * 16 -> r2 = r0 * 17
 
 	pop {pc}
 
