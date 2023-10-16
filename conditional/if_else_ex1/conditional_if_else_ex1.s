@@ -6,7 +6,7 @@
 main:
 	mov r0, #3
 	mov r1, #5
-	mov r2, #5
+	mov r2, #8
 
 	cmp r0, r1    // the cc* in this example is GT for greater than in true part
 	addgt r3, r1, r2

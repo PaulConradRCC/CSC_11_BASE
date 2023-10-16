@@ -15,3 +15,17 @@ main:
 	// what are the values of R6, R7, R8?
 
 	mov pc, lr // make program counter the current lr content to exit program
+
+/*
+
+r4 = 9;
+r5 = 3;
+
+if ( r4 != r5 )
+{
+	r6 = r4 + r5;
+	r7 = r5 - r4;
+	r8 = r4 + r4;
+}
+
+*/
