@@ -47,10 +47,10 @@ while_true:
 err_out:
 	ldr r0, =err_mg
 	bl printf
-kb_flush:
-	bl getchar
-	cmp r0, #13
-	bne kb_flush
+//kb_flush:
+//	bl getchar
+//	cmp r0, #13
+//	bne kb_flush
 	b while_true
 end_while_loop:
 	pop {pc}
