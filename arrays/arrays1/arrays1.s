@@ -4,7 +4,7 @@
 .global main
 main:
 	push {lr}
-	
+
 	// let's populate our array a of 100 bytes (25 words - 4 bytes to a word)
 	ldr r1, =a 	// r1 points to beginning of array - think of this in C++ as a[0]
 	mov r2, #0
@@ -44,6 +44,7 @@ oa_done:
 .balign 4
 
 a: .skip 100 // array of 100 bytes (this just reserves us 100 bytes of space, no initialization done
+
 b: .word -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
    .word -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
    .word -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1

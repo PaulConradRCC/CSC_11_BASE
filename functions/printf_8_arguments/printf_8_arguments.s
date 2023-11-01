@@ -15,7 +15,7 @@ main:
 	sub r5, r3, r2 // e=c-b
 	sub r5, r5, r1 // e=e-a
 	mul r6, r1, r2 // f=a*b
-	mul r6, r6, r3 // f=f*c
+	mul r6, r3, r6 // f=f*c
 	add r7, r1, r2, lsl #2 // what is in r7?
 	ldr r0, =fmt_str
 	push {r4-r7}

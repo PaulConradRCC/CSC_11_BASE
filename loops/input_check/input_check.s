@@ -37,6 +37,8 @@ while_true:
 	ldr r0, =scan_s
 	ldr r1, =value
 	bl scanf
+bp_label:		// label for breakpoint in gdb so scanf properly halts.
+
 	ldr r0, =value
 	ldr r0, [r0]
 
