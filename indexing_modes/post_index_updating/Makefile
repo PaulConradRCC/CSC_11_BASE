@@ -9,3 +9,5 @@ post_index_updating.o: post_index_updating.s
 
 clean:
 	rm -rf post_index_updating *.o
+
+run: ./post_index_updating
