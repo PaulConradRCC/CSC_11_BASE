@@ -1,0 +1,1 @@
+cmd_/home/pi/kernel_programming_research/enable_ccr/modules.order := {   echo /home/pi/kernel_programming_research/enable_ccr/enable_ccr.ko; :; } | awk '!x[$$0]++' - > /home/pi/kernel_programming_research/enable_ccr/modules.order

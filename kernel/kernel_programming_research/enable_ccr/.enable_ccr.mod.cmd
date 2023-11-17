@@ -1,0 +1,1 @@
+cmd_/home/pi/kernel_programming_research/enable_ccr/enable_ccr.mod := { echo  /home/pi/kernel_programming_research/enable_ccr/enable_ccr.o;  echo; } > /home/pi/kernel_programming_research/enable_ccr/enable_ccr.mod

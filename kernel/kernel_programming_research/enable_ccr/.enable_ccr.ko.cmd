@@ -1,0 +1,1 @@
+cmd_/home/pi/kernel_programming_research/enable_ccr/enable_ccr.ko := ld -r  -EL  --build-id=sha1  -T scripts/module.lds -o /home/pi/kernel_programming_research/enable_ccr/enable_ccr.ko /home/pi/kernel_programming_research/enable_ccr/enable_ccr.o /home/pi/kernel_programming_research/enable_ccr/enable_ccr.mod.o;  true

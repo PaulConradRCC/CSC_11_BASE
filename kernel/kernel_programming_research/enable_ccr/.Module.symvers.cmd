@@ -1,0 +1,1 @@
+cmd_/home/pi/kernel_programming_research/enable_ccr/Module.symvers := sed 's/ko$$/o/' /home/pi/kernel_programming_research/enable_ccr/modules.order | scripts/mod/modpost -m -a   -o /home/pi/kernel_programming_research/enable_ccr/Module.symvers -e -i Module.symvers   -T -
