@@ -1,4 +1,4 @@
-// pass_by_value
+// pass_by_reference
 .global main
 
 .align 4
@@ -6,10 +6,10 @@
 before:		.asciz	"Val1, val2, val3 BEFORE function call\n"
 after:		.asciz	"Val1, val2, val3 AFTER function call\n"
 
-output1:	.asciz	"%d\n"
-R0_msg:		.asciz  "R0: %d\n"
-R1_msg:		.asciz	"R1: %d\n"
-R2_msg:		.asciz	"R2: %d\n"
+output1:	.asciz	"Val1 + val2 + val3 = %d\n"
+R4_msg:		.asciz  "R4: %d\n"
+R5_msg:		.asciz	"R5: %d\n"
+R6_msg:		.asciz	"R6: %d\n"
 
 val1_msg:	.asciz  "val1: %d\n"
 val2_msg:	.asciz	"val2: %d\n"
@@ -25,8 +25,8 @@ val3:	.word	245
 .align 4
 .text
 pass_by_reference_example:
-	push {LR}
-	push { R4-R6 }
+	push { R4-R6, LR }
+	//push { R4-R6 }
 
 	ldr R4, [R0]	// R4 is holding data stored at pointer in R0
 	ldr R5, [R1]	// R5 is holding data stored at pointer in R1
@@ -51,24 +51,24 @@ pass_by_reference_example:
 
 	push { R0-R2 }
 	mov R1, R4	// copy of R4's value in R1 for printf
-	ldr R0, =R0_msg
+	ldr R0, =R4_msg
 	bl printf
 	pop { R0-R2 }
 
 	push { R0-R2 }
-	ldr R0, =R1_msg
+	ldr R0, =R5_msg
 	mov R1, R5
 	bl printf
 	pop { R0-R2 }
 
 	push { R0-R2 }
 	mov R1, R6	// copy of R6's value in R1 for printf
-	ldr R0, =R2_msg
+	ldr R0, =R6_msg
 	bl printf
-	pop { R0-R2 }
+	//pop { R0-R2 }
 
-	pop { R4-R6 }
-	pop { PC }
+	pop { R4-R6, R0-R2, PC }
+	//pop { PC }
 
 
 main: 	push {lr} // save link register, this is one of many ways this can be done
@@ -78,7 +78,6 @@ main: 	push {lr} // save link register, this is one of many ways this can be don
 	ldr R4, =val1
 	ldr R5, =val2
 	ldr R6, =val3
-
 
 	ldr R0, =before
 	bl printf

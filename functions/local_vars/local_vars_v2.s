@@ -1,4 +1,4 @@
-// an example function with local variables with "bug" fix
+// an example function with local variables, with bug fix that wasn't a fix and made it buggier!
 .global my_fun
 .global main
 
@@ -6,15 +6,14 @@
 .text
 my_fun:
 	push {R11,LR}		// save R11 and LR
-	sub R11, SP, #4		// R11 is frame pointer ( SP - 4 )
-	//sub SP, R11, #4		// SP = R11 - 4; R11 has 1 local variable of 4 bytes
-	mov SP, R11
+	mov R11, SP		// R11 is frame pointer ( same value as SP )
+	sub SP, R11, #4		// SP = R11 - 4; R11 has 1 local variable of 4 bytes
 	str R0, [R11] 		// *(r11) = r0;
 
 	push {R1}
 	pop {R1}
 
-	add SP, R11, #4		// SP = R11 + 4, deallocate 1 local variable space
+	mov SP, R11		// SP = R11, deallocate 1 local variable space
 	pop {R11,PC}		// restore R11 and LR (storing LR content in PC)
 
 main:

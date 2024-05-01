@@ -1,0 +1,11 @@
+# Makefile
+all: printf_8_arguments_2
+
+printf_8_arguments_2: printf_8_arguments_2.o
+	gcc -g -o $@ $+
+
+printf_8_arguments_2.o: printf_8_arguments_2.s
+	as -g -o $@ $<
+
+clean:
+	rm -rf printf_8_arguments_2 *.o
