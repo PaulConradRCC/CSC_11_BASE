@@ -14,6 +14,8 @@ main:
 	eor r6, r4, r5	// bitwise eor r4 and r5, store result in r6
 	eor r7, r6, r4  // bitwise eor r6 and r4, store result in r7 (same value as r5)
 	eor r8, r6, r5  // bitwise eor r6 and r5, store result in r8 (same value as r4)
+	mov r1, #-1
+	eor r9, r8, r1 // r9 = r8 eor -1???
 	ldr r0, =message
 	mov r1, r4
 	mov r2, r5

@@ -16,7 +16,7 @@ scan_pattern: .asciz "%d"
 
 .text
 .global main
-//int main() 
+//int main()
 main:
 	push {lr} // {
 
