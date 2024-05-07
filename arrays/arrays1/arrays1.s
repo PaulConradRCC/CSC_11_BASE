@@ -43,6 +43,8 @@ oa_done:
 .data
 .balign 4
 
+b0: .word -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+
 a: .skip 100 // array of 100 bytes (this just reserves us 100 bytes of space, no initialization done
 
 b: .word -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
