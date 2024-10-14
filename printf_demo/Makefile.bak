@@ -2,13 +2,10 @@
 all: printf_demo
 
 printf_demo: printf_demo.o
-	gcc -g -o $@ $+
+	gcc -o $@ $+
 
 printf_demo.o: printf_demo.s
-	as -g -o $@ $<
-
-gdb:
-	gdb ./printf_demo
+	as -o $@ $<
 
 clean:
 	rm -rf printf_demo *.o
