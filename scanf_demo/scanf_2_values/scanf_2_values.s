@@ -1,4 +1,5 @@
-.section .data
+.align 4
+.section .rodata
 /* Prompt message */
 prompt: .asciz "Hi there! Please type in two integer values (seperated by a space): "
 
@@ -8,11 +9,14 @@ response: .asciz "I read the numbers %d and %d from the keyboard\n"
 /* Format pattern for scanf */
 pattern: .asciz "%d %d"
 
+.align 4
+.section .data
 /* Where scanf will store the number read */
 value_read1: .word 0
 value_read2: .word 0
 
-.section .text
+.align 4
+.text
 .global main
 main:
 	push {lr}		/* save our return address */
@@ -30,10 +34,8 @@ main:
     	bl scanf              	/* call to scanf */
 next:
 	ldr r0, =response	/* r0 contains pointer to response message */
-	mov r1, r4		/* r4 contains pointer to value_read1 */
-	ldr r1, [r1]		/* r1 contains value dereferenced from r1 in previous instruction */
-	mov r2, r5
-	ldr r2, [r2]
+	ldr r1, [r4]		/* r1 contains value dereferenced from r4 */
+	ldr r2, [r5]
 	bl printf		/* call printf to output our response */
 
 	mov r0, #0		/* exit code 0 = program terminated normally */
