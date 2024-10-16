@@ -1,7 +1,7 @@
 .align 4
 .section .rodata
 /* Prompt message */
-prompt: .asciz "Hi there! Please type in two integer values (seperated by a space): "
+prompt: .asciz "Hi there! Please type in three integer values (seperated by a space): "
 
 /* Response message */
 response: .asciz "I read the numbers %d, %d and %d from the keyboard\n"

@@ -38,7 +38,7 @@ main:
 	mov r8, r7
 	push {r8}
     	bl scanf              	/* call to scanf */
-	add sp, #4
+	pop {r8} 		//	add sp, #4
 next:
 	ldr r0, =response	/* r0 contains pointer to response message */
 	ldr r1, [r4]		/* r1 contains value dereferenced from r4 */
