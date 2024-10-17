@@ -14,11 +14,14 @@ hello_msg:	.asciz "Hello world!\n"
 main:	// assembly program here
 	stp x29, x30, [sp, -16]!	// save link register x30
 
-	adrp x0, hello_msg 		// x0 = &hello_msg
-	add x0, x0, :lo12: hello_msg	// x0 = x0 + (lo12) hello_msg
+	ldr x0, adr_hello_msg
+//	adrp x0, hello_msg 		// x0 = &hello_msg
+//	add x0, x0, :lo12: hello_msg	// x0 = x0 + (lo12) hello_msg
 	bl printf		// call printf
 
 	ldp x29, x30, [sp], 16
 	mov w0, #0 // return code for your program (must be 8 bits)
 
 	ret
+
+adr_hello_msg:	.dword hello_msg
