@@ -15,9 +15,9 @@ y:	.word	0
 .align 8
 .text
 
-adr_prompt_msg:	.dword	prompt_msg
-adr_scan_str:	.dword	scan_str
-adr_result_msg:	.dword	result_msg
+adr_prompt_msg:		.dword	prompt_msg
+adr_scan_str:		.dword	scan_str
+adr_result_msg:		.dword	result_msg
 adr_x:			.dword	x
 adr_y:			.dword	y
 
