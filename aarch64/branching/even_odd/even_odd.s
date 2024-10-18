@@ -1,57 +1,66 @@
 .global main
-.section .rodata	// constant data goes here
 
+.align 8
+.section .rodata	// constant data goes here
 prompt:		.asciz	"Enter an integer value: "
 scan_str: 	.asciz	"%d"
 msg1: 		.asciz	"%d is an even number!\n"
 msg2: 		.asciz	"%d is an odd number!\n"
 
-.data	// non constant data goes here
+.align 8
+.section .data	// non constant data goes here
 value:	.word	0
 
-.text	// program instruction code goes here
+.align 8
+.section .text	// program instruction code goes here
+adr_prompt:	.dword	prompt
+adr_scan_str:	.dword	scan_str
+adr_msg1:	.dword	msg1
+adr_msg2:	.dword	msg2
+adr_value:	.dword	value
 
 main:
-	push {lr} //{
+	stp fp, lr, [sp, -16]!	 //{
 
 	// prompt for an integer value
 	// printf(prompt);
-	ldr r0, =prompt
+	ldr x0, adr_prompt
 	bl printf
 
 	// read in from the keyboard the integer value
 	// scanf(scan_str, &value);
-	ldr r0, =scan_str
-	ldr r1, =value
+	ldr x0, adr_scan_str
+	ldr x1, adr_value
 	bl scanf
 
 	// load value into register r1
-	ldr r1, =value
-	ldr r1, [r1]
+	ldr x1, adr_value
+	ldr x1, [x1]
 
 	// do a logical AND 1 against value, if 0, value is even, else value is odd 
 	// if ( (r1 & 1)==0 )
-if_r1_and_1_eq_0:
-	and r0, r1, #1
-	cmp r0, #0
-	bne else_r1_and_1_ne_0
+if_x1_and_1_eq_0:
+	and x0, x1, #1
+	cmp x0, #0
+	bne else_x1_and_1_ne_0
 	//{
 	//	printf(msg1, value);
 	//}
 	// code for the "true" part
-	ldr r0, =msg1
+	ldr x0, adr_msg1
 	bl printf
-	b end_if_r1_and_1_eq_0
+	b end_if_x1_and_1_eq_0
 	// else
-else_r1_and_1_ne_0:
+else_x1_and_1_ne_0:
 	//{
 	//	printf(msg2, value);
-	ldr r0, =msg2
+	ldr x0, adr_msg2
 	bl printf
 	//} // end if/else block
-end_if_r1_and_1_eq_0:
+end_if_x1_and_1_eq_0:
 
 	// return 0;
-	mov r0, #0
+	mov w0, #0
 	//}
-	pop {pc}
+	ldp fp, lr, [sp], 16
+	ret
