@@ -1,18 +1,17 @@
-// bare bones source file
 .global main
 
 .align 8
 .section .rodata
-prompt:		.asciz "Enter two unsigned 32 bit integers: "
-scan_str:	.asciz	"%u %u"
-format_string:	.asciz "%u + %u = %u\n"
-format_str2:	.asciz "%u - %u = %u\n"
-format_str3:	.asciz "%u * %u = %u\n"
+prompt:		.asciz "Enter two unsigned 64 bit integers: "
+scan_str:	.asciz	"%lu %lu"
+format_string:	.asciz "%lu + %lu = %lu\n"
+format_str2:	.asciz "%lu - %lu = %lu\n"
+format_str3:	.asciz "%lu * %lu = %lu\n"
 
 .align 8
 .section .data
-val1:		.word	0
-val2:		.word	0
+val1:		.dword	0
+val2:		.dword	0
 
 .align 8
 .text

@@ -2,12 +2,12 @@
 
 .align 8
 .section .rodata
-prompt:		.asciz "Enter two unsigned 32 bit integers: "
-scan_str:	.asciz	"%u %u"
-format_string:	.asciz "%u + %u = %u\n"
-format_string2:	.asciz "%u - %u = %u\n"
-format_string3:	.asciz "%u * %u = %u\n"
-format_string4:	.asciz "%u * %u = %llu (umull)\n"
+prompt:		.asciz "Enter two unsigned 64 bit integers: "
+scan_str:	.asciz	"%lu %lu"
+format_string:	.asciz "%lu + %lu = %lu\n"
+format_string2:	.asciz "%lu - %lu = %lu\n"
+format_string3:	.asciz "%lu * %lu = %lu\n"
+format_string4:	.asciz "%lu * %lu = %llu (umull)\n"
 
 .align 8
 .section .data
