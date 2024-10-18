@@ -1,19 +1,19 @@
-// bare bones source file
+// 64 bit long int
 .global main
 
 .align 8
 .section .rodata
-format_string:	.asciz "%d + %d = %d\n"
+format_string:	.asciz "%ld + %ld = %ld\n"
 
 .align 8
 .text
 adr_format_string:	.dword	format_string
 
 main:
-	stp x29, x30, [sp, -16]!
+	stp fp, lr, [sp, -16]!
 	// assembly program here
-	mov x4, #1			// x4 = 1
-	mov x5, #2			// x5 = 2
+	ldr x4, a_big_num1		// x4 = a_big_num1
+	ldr x5, a_big_num2		// x5 = a_big_num2
 	add x6, x4, x5			// x6 = x4 + x5
 
 	ldr x0, adr_format_string	// x0 = address of format_string
@@ -24,5 +24,8 @@ main:
 	bl printf			// call printf with bl (branch with link)
 
 	mov w0, #0 			// return code for your program (must be 8 bits)
-	ldp x29, x30, [sp], 16
+	ldp fp, lr, [sp], 16
 	ret
+
+a_big_num1:	.dword	12345678901234567
+a_big_num2:	.dword	23456789012345678
