@@ -7,6 +7,8 @@ or: or.o
 or.o: or.s
 	as -g -o $@ $<
 
+gdb:
+	gdb ./or
+
 clean:
 	rm -rf or *.o
-
