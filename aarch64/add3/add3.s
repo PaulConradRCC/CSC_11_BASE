@@ -1,9 +1,12 @@
+// this program is a demonstration that we cannot have four registers for a single add
+// instruction, this should not build.
 .global main
 
+.align 8
 .text
 main:
-	mov r0, #1
-	mov r1, #2
-	mov r2, #3
-	add r0, r0,r1,r2
-	mov pc, lr
+	mov x0, #1
+	mov x1, #2
+	mov x2, #3
+	add x0, x0, x1, x2
+	ret
