@@ -10,63 +10,62 @@ format_str2:	.asciz "%u - %u = %u\n"
 format_str3:	.asciz "%u * %u = %u\n"
 
 .align 8
-.data
+.section .data
 val1:		.word	0
 val2:		.word	0
 
 .align 8
 .text
+adr_prompt:		.dword	prompt
+adr_scan_str:		.dword	scan_str
+adr_format_string:	.dword	format_string
+adr_format_str2:	.dword	format_str2
+adr_format_str3:	.dword	format_str3
+adr_val1:		.dword	val1
+adr_val2:		.dword	val2
+
 main:
 	stp fp, lr, [sp, -16]!
-
 	// assembly program here
-	// prompt user for two 32 bit integers
-	adrp x0, prompt
-	add x0, x0, :lo12: prompt
+	ldr x18, adr_val1		// x18 is pointer to val1
+	ldr x19, adr_val2		// x19 is pointer to val2
+
+// prompt user for two 32 bit integers
+	ldr x0, adr_prompt
 	bl printf
 
 	// read in the two 32 bit integers from the keyboard via scanf
-	adrp x0, scan_str
-	add x0, x0, :lo12: scan_str
-	adrp x1, val1
-	add x1, x1, :lo12: val1
-	adrp x2, val2
-	add x2, x2, :lo12: val2
+	ldr x0, adr_scan_str		// x0 contains address of scan_str
+	mov x1, x18			// x1 has copy of pointer to val1 (in x18)
+	mov x2, x19			// x2 has copy of pointer to val2 (in x19)
 	bl scanf
 scanf_bp:
 	// load from memory, the values for val1 and val2,
-	// storing the values in x4 and x5, respectively
-	adrp x0, val1
-	adrp x1, val2
-	add x0, x0, :lo12: val1
-	add x1, x1, :lo12: val2
-	ldr x19, [x0]
-	ldr x20, [x1]
+	// storing the values in x20 and x21, respectively
+	ldr x20, [x18]
+	ldr x21, [x19]
 
-	adds x6, x19, x20	// x6 = x9 + x10, s=update cpsr
-	subs x21, x19, x20  	// x11 = x9 - x10, s=update cpsr
-	mul x22, x19, x20  	// x12 = x9 * x10
+	adds x22, x20, x21	// x22 = x20 + x21, s=update cpsr
+	subs x23, x20, x21  	// x23 = x20 - x21, s=update cpsr
+	mul x24, x20, x21  	// x24 = x20 * x21
 
-	adrp x0, format_string	// x0 = &format_string
-	add x0, x0, :lo12: format_string
-	mov x1, x19	// x1 = x4
-	mov x2, x20	// x2 = x5
-	mov x3, x6	// x3 = x6
-	bl printf	// call printf with bl (branch with link)
+	ldr x0, adr_format_string
+	mov x1, x20			// x1 = x20
+	mov x2, x21			// x2 = x21
+	mov x3, x22			// x3 = x22
+	bl printf			// call printf with bl (branch with link)
 
-	adrp x0, format_str2	// x0 = &format_str2
-	add x0, x0, :lo12: format_str2
-	mov x1, x19	// x1 = x4
-	mov x2, x20	// x2 = x5
-	mov x3, x21	// x3 = x7
-	bl printf	// call printf with bl (branch with link)
+	ldr x0, adr_format_str2
+	mov x1, x20			// x1 = x20
+	mov x2, x21			// x2 = x21
+	mov x3, x23			// x3 = x23
+	bl printf			// call printf with bl (branch with link)
 
-	adrp x0, format_str3	// x0 = &format_str3
-	add x0, x0, :lo12: format_str3
-	mov x1, x19	// x1 = x4
-	mov x2, x20	// x2 = x5
-	mov x3, x22	// x3 = x8
-	bl printf	// call printf with bl (branch with link)
+	ldr x0, adr_format_str3
+	mov x1, x20			// x1 = x20
+	mov x2, x21			// x2 = x21
+	mov x3, x24			// x3 = x24
+	bl printf			// call printf with bl (branch with link)
 
 	mov w0, #0 // return code for your program (must be 8 bits)
 	ldp fp, lr, [sp], 16
