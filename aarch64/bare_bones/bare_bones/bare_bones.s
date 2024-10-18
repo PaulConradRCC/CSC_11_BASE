@@ -15,11 +15,11 @@
 
 .align 8
 .text
-main: 	stp x29, x30, [sp, -16]!	// save link register and frame pointer
+main: 	stp fp, lr, [sp, -16]!	// save link register and frame pointer
 
 	// assembly program here
 
 	mov w0, #0			// return code for your program
-	ldp x29, x30, [sp], 16		// restore original link register and frame pointer
+	ldp fp, lr, [sp], 16		// restore original link register and frame pointer
 	ret				// return from main function 
 

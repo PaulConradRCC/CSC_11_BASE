@@ -1,6 +1,6 @@
 .global main
 
-.align 4
+.align 8
 .section .rodata
 /* Prompt message */
 prompt: .asciz "Hi there! Please type an integer number: "
@@ -11,30 +11,35 @@ response: .asciz "I read the number %d from the keyboard\n"
 /* Format pattern for scanf */
 pattern: .asciz "%d"
 
-.align 4
-.data
+.align 8
+.section .data
 /* Where scanf will store the number read */
 value_read: .word 0
 
-.align 4
+.align 8
 .text
+adr_prompt:	.dword	prompt
+adr_response:	.dword	response
+adr_pattern:	.dword	pattern
+adr_value_read:	.dword	value_read
+
 main:
-	push {lr}		/* save our return address */
+	stp fp, lr, [sp, -16]!		/* save frame pointer and link register */
 
 	// register r4 holds address to value_read
-	ldr r4, =value_read     /* LoaD Register into R4 address of value_read */
+	ldr x18, adr_value_read		/* LoaD Register into x18 address of value_read */
 
-    	ldr r0, =prompt		/* r0 contains pointer to prompt message */
-    	bl printf		/* call printf to output our prompt */
+    	ldr x0, adr_prompt		/* x0 contains pointer to prompt message */
+    	bl printf			/* call printf to output our prompt */
 
-    	ldr r0, =pattern 	/* r0 contains pointer to format string for our scan pattern */
-    	mov r1, r4	  	/* r1 contains pointer to variable label where our number is stored */
-    	bl scanf              	/* call to scanf */
+    	ldr x0, adr_pattern 		/* x0 contains pointer to format string for our scan pattern */
+    	mov x1, x18	  		/* x1 contains pointer to variable label where our number is stored */
+    	bl scanf              		/* call to scanf */
 next:
-	ldr r0, =response	/* r0 contains pointer to response message */
-	mov r1, r4		/* r1 contains pointer to value_read ( equivalent to r1 = r4; )*/
-	ldr r1, [r1]		/* r1 contains value dereferenced from r1 in previous instruction */
-	bl printf		/* call printf to output our response */
+	ldr x0, adr_response		/* x0 contains pointer to response message */
+	ldr x1, [x18]			/* x1 contains value dereferenced from address in x18 */
+	bl printf			/* call printf to output our response */
 
-	mov r0, #0		/* exit code 0 = program terminated normally */
-	pop {pc}		/* exit our main function */
+	mov w0, #0			/* exit code 0 = program terminated normally */
+	ldp fp, lr, [sp], 16
+	ret				/* exit our main function */
