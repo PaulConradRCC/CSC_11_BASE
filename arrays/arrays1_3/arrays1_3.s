@@ -6,7 +6,7 @@
 .global main
 main:
 	push {lr}
-	
+
 	// let's populate our array a of 100 bytes (25 words - 4 bytes to a word)
 	ldr r1, =a 	// r1 points to beginning of array - think of this in C++ as a[0]
 	mov r0, r1	// R0 contains base address of the array, using R1 for doing the calculation of next address

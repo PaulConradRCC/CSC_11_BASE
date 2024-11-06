@@ -2,7 +2,7 @@
 
 .align 4
 .section .rodata
-out_msg: .asciz "Value was %d, now is %d\n"
+out_msg: .asciz "Value was %X, now is %X\n"
 
 .align 4
 .text

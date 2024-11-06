@@ -1,3 +1,4 @@
+// this program will not compile due to line 12
 .global main
 
 .text
@@ -8,7 +9,7 @@ main:
 	sub r4, r2, r1, lsl #2 // r4 = r2 - (r1 * 4)
 	rsb r5, r2, r1, lsl #2 // r5 = (r1 * 4) - r2 ???
 
-	mul r6, r2, r1 lsl #3 // r6 = r2 * r1 * 8 ???
+	mul r6, r2, r1, lsl #3 // r6 = r2 * r1 * 8 ???
 
 	mov r0, #0
 	mov pc, lr

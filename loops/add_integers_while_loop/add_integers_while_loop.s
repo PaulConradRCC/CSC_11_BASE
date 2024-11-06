@@ -8,6 +8,8 @@ out_msg: .asciz "Sum is %d\n"
 .align 4
 .text
 main:
+	push {lr}
+
 	mov r0, #1	// r0 is loop counter, initialized to 1
 	mov r1, #0	// r1 holds the sum
 while_r0_le_10:
@@ -15,11 +17,13 @@ while_r0_le_10:
 	bgt end_while_r0_le_10 // if r0 > 10, we're done with loop
 
 	add r1, r1, r0	// r1 = r1 + r0
-	add r0, #1	// r0++
+	add r0, r0, #1	// r0++
 	b while_r0_le_10 // branch back up to test r0 against 10 again
 end_while_r0_le_10:
 
-	push {lr}
 	ldr r0, =out_msg
 	bl printf
+
+	mov r0, #0
 	pop {pc}
+

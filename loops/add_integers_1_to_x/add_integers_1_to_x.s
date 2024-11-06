@@ -2,6 +2,7 @@
 
 .global main
 
+.align 4
 .section .rodata
 prompt: .asciz "Enter an integer between 1 and 92681: "
 scan_s: .asciz "%u"

@@ -40,7 +40,7 @@ oa_loop:cmp r4, r1	// Is R4 equal to the number of elements to output?
 oa_done:
 	pop {r4,pc}
 
-.data
+.section .data
 .balign 4
 
 b0: .word -1, -1, -1, -1, -1, -1, -1, -1, -1, -1

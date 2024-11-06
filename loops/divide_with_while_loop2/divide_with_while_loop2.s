@@ -45,9 +45,9 @@ main: 	push {lr} // save link register, this is one of many ways this can be don
 				// dividend    divisor   r8 state    r5 value     r4 value	r0 = r4 / r5     r1 = r4 % r5
 				// ------------------------------------------------------------------------------------------
 				//  positive   positive  state 0    +divisor     +dividend      no sign changes needed
-				//  positive   negative  state 1    -divisor     +dividend	r0 = -r0         r1 = r1 - r5
-				//  negative   positive  state 2    +divisor     -dividend      r0 = -r0         r1 = r5 - r1
-			        //  negative   negative  state 3    -divisor     -divisor       no change        r1 = -r1
+				//  positive   negative  state 1    -divisor     +dividend	r0 = -r0        r1 = r1 - r5
+				//  negative   positive  state 2    +divisor     -dividend      r0 = -r0        r1 = r5 - r1
+			        //  negative   negative  state 3    -divisor     -dividend      no change       r1 = -r1
 	cmp r5, #0		// r5 < 0?
 	movlt r6, #-1		// r6 = -1 => r6 is true, we have a negative value
 	cmp r4, #0
