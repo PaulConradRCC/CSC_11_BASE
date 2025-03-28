@@ -1,4 +1,4 @@
-// bare bones source file 
+// bare bones source file
 .global main
 
 .align 4
