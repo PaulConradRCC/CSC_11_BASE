@@ -4,7 +4,7 @@
 .text
 
 main:
-	mov x0, #3
+	mov x0, #6
 	mov x1, #5
 	mov x2, #8
 
