@@ -10,7 +10,7 @@ response: .asciz "I read the numbers %d and %d from the keyboard\n"
 pattern: .asciz "%d %d"
 
 .align 4
-.data
+.section .data
 /* Where scanf will store the number read */
 value_read1: .word 0
 value_read2: .word 0
@@ -37,10 +37,10 @@ next:
 
 	// output any response at the end of program
 	ldr r0, =response	/* r0 contains pointer to response message */
-	mov r1, r4		/* r4 contains pointer to value_read1 */
-	ldr r1, [r1]		/* r1 contains value dereferenced from r1 in previous instruction */
-	mov r2, r5
-	ldr r2, [r2]
+	//mov r1, r4		/* r4 contains pointer to value_read1 */
+	ldr r1, [r4]		/* r1 contains value dereferenced from r1 in previous instruction */
+	//mov r2, r5
+	ldr r2, [r5]
 	bl printf		/* call printf to output our response */
 
 	mov r0, #0		/* exit code 0 = program terminated normally */
