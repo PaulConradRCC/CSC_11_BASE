@@ -14,7 +14,7 @@ main:
 	// assembly program here
 	ldr x4, a_big_num1		// x4 = a_big_num1
 	ldr x5, a_big_num2		// x5 = a_big_num2
-	add x6, x4, x5			// x6 = x4 + x5
+	adds x6, x4, x5			// x6 = x4 + x5
 
 	ldr x0, adr_format_string	// x0 = address of format_string
 	mov x1, x4			// x1 = x4

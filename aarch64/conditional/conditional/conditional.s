@@ -4,7 +4,7 @@
 .text
 
 main:
-	mov x0, #9 	// move into x0, the integer literal 9
+	mov x0, #10 	// move into x0, the integer literal 10
 	cmp x0, #10 	// compare x0 and integer literal 10, does test: x0-10 == 0?
 	// conditional execution from ARM32 commented out as it will not work with ARM64
 	//moveq r1, #1 	// if r0 is equal to 10, then move into r1 the value 1

@@ -34,7 +34,7 @@ main:
     	ldr x0, adr_prompt		/* x0 contains pointer to prompt message */
     	bl printf			/* call printf to output our prompt */
 
-    	ldr x0, =pattern 		/* x0 contains pointer to format string for our scan pattern */
+    	ldr x0, adr_pattern 		/* x0 contains pointer to format string for our scan pattern */
     	mov x1, x18	  		/* x1 contains pointer to variable label where our first number is stored */
 	mov x2, x19			/* x2 contains pointer to variable label where our second number is stored */
     	bl scanf              		/* call to scanf */
@@ -42,7 +42,7 @@ next:
 	// do whatever it is we need
 
 	// output any response at the end of program
-	ldr x0, =response	/* x0 contains pointer to response message */
+	ldr x0, adr_response	/* x0 contains pointer to response message */
 	ldr x1, [x18]		/* x1 contains value dereferenced from x18 */
 	ldr x2, [x19]
 	bl printf		/* call printf to output our response */

@@ -51,7 +51,7 @@ main:
 	adds x23, x21, x22		// x23 = x21 + x22, s=update cpsr
 	subs x24, x21, x22  		// x24 = x21 - x22, s=update cpsr
 	mul x25, x21, x22  		// x25 = x21 * x22, s=update cpsr
-	umull x26, w21, w22 		// x26 = x21 * x22 (31:0), x27 = x21 * x22 (63:32)??????
+	umull x26, w21, w22	// x26 = x21 * x22 (63:0), x27 = x21 * x22 (127:64)??????
 
 	ldr x0, adr_format_string	// x0 = address of format_string
 	mov x1, x21			// x1 = x21
